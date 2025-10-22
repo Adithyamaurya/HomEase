@@ -266,3 +266,39 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.style.cursor = 'auto';
   }
 })();
+
+const container = document.querySelector(".testimonial-container");
+  const cards = document.querySelectorAll(".testimonial-card");
+  const dots = document.querySelectorAll(".dot");
+
+  let index = 0;
+  const visibleCards = 3;
+  const totalCards = cards.length;
+
+  // Clone first few cards to make looping smooth
+  for (let i = 0; i < visibleCards; i++) {
+    const clone = cards[i].cloneNode(true);
+    container.appendChild(clone);
+  }
+
+  function slideTestimonials() {
+    index++;
+    const cardWidth = cards[0].offsetWidth + 40; // include gap
+    container.style.transition = "transform 0.8s ease-in-out";
+    container.style.transform = `translateX(-${index * cardWidth}px)`;
+
+    // Update dots
+    dots.forEach(dot => dot.classList.remove("active-dot"));
+    dots[index % dots.length].classList.add("active-dot");
+
+    // Reset when end is reached
+    if (index === totalCards) {
+      setTimeout(() => {
+        container.style.transition = "none";
+        container.style.transform = "translateX(0)";
+        index = 0;
+      }, 850);
+    }
+  }
+
+  setInterval(slideTestimonials, 3500);
