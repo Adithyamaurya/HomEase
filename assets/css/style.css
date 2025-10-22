@@ -214,6 +214,22 @@ body {
     margin-bottom: 30px;
     line-height: 1.6;
 }
+  .display-hero {
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+  }
+  .display-hero-content {
+    max-width: 600px;  
+    padding: 40px;
+  }
+  .display-hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
 
 /* Buttons */
 .btn {
