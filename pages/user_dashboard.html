@@ -2,45 +2,422 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User Dashboard | HomEase</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - HomEase</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .dashboard {
+            padding: 2rem;
+            background: white;
+            min-height: 60vh;
+        }
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .dashboard-header h1 {
+            font-size: 2.1rem;
+            color: #232943;
+            font-weight: 600;
+        }
+        .edit-btn {
+            padding: 1rem;
+            font-size: 1rem;
+            color: #fff;
+            background: #FF7700;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .edit-btn:hover {
+            background: #1a2332;
+        }
+        .profile-summary {
+            margin-bottom: 32px;
+            background: #f8f7ef;
+            padding: 1.2rem 1.5rem;
+            box-shadow: 0 1px 6px rgba(200,200,180,0.07);
+            display: flex;
+            gap: 38px;
+            align-items: center;
+        }
+        .profile-details {
+            font-size: 1.08rem;
+            color: #555;
+        }
+        .profile-details strong {
+            margin-right: 10px;
+        }
+        .bookings {
+            margin-bottom: 2rem;
+        }
+        .booking-card {
+            border: 1px solid #eee;
+            padding: 1rem;
+            background: #fafaf7;
+            margin-bottom: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .booking-info {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+        .booking-actions button {
+            background: #fff3e7;
+            color: #FF7700;
+            border: 1px solid #ffc188;
+            padding: 0.35rem 1rem;
+            margin-left: 8px;
+            cursor: pointer;
+            transition: background .2s;
+            font-size: 0.97rem;
+        }
+        .booking-actions button:hover {
+            background: #FF7700;
+            color: #fff;
+        }
+        /* Modal styles */
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            inset: 0;
+            background: rgba(25, 25, 23, 0.32);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-backdrop.active {
+            display: flex;
+        }
+        .profile-modal {
+            background: #fff;
+            padding: 2rem 1.7rem;
+            max-width: 350px;
+            width: 90vw;
+            box-shadow: 0 7px 30px rgba(80,80,70,0.14);
+            position: relative;
+        }
+        .profile-modal h2 {
+            margin-top: 0;
+            color: #232943;
+            font-size: 1.3rem;
+            margin-bottom: 18px;
+        }
+        .profile-modal label {
+            font-size: 0.98rem;
+            margin-bottom: 7px;
+            color: #3a3933;
+        }
+        .profile-modal input[type="text"] {
+            padding: 0.6rem;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        .profile-modal .btn-modal {
+            background: #FF7700;
+            color: #fff;
+            border: none;
+            padding: 0.52rem 1.2rem;
+            transition: background 0.2s;
+            font-size: 1rem;
+            margin-top: 7px;
+        }
+        .profile-modal .btn-modal:hover {
+            background: #e96600;
+        }
+        .close-modal {
+            position: absolute;
+            top: 17px;
+            right: 17px;
+            font-size: 1.2rem;
+            color: #888;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+         .notification-bell {
+            position: relative;
+            margin-left: 16px;
+            cursor: pointer;
+        }
+        .bell-icon {
+            font-size: 1.6rem;
+            color: #FF7700;
+        }
+        .notif-count {
+            position: absolute;
+            top: -7px; right: -7px;
+            background: #FE8600;
+            color: #fff;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+        }
+        .notif-dropdown {
+            display: none;
+            position: absolute;
+            top: 36px; right: 0;
+            background: #fff;
+            border: 1px solid #ecddbe;
+            border-radius: 7px;
+            min-width: 230px;
+            z-index: 44;
+            box-shadow: 0 7px 20px rgba(180,170,150,0.13);
+        }
+        .notif-dropdown.active {
+            display: block;
+        }
+        .notif-dropdown ul { list-style: none; margin: 0; padding: 10px 0; }
+        .notif-dropdown li {
+            padding: 8px 18px;
+            color: #232943;
+            font-size: 0.99rem;
+            border-bottom: 1px solid #f5e7c8;
+        }
+        .notif-dropdown li:last-child { border-bottom: none; }
+
+        .recommended-section {
+            margin: 2rem 0 2rem 0;
+        }
+        .recommended-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #232943;
+            margin-bottom: 10px;
+        }
+        .recommended-list {
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+        .recommended-box {
+            background: #fffbe9;
+            border: 1px solid #ffd795;
+            padding: 18px 22px;
+            min-width: 140px;
+            color: #634200;
+            font-size: 1.07rem;
+            text-align: center;
+        }
+
+        .booking-actions {
+            display: flex; gap: 4px; flex-wrap: wrap;
+            align-items: center;
+        }
+        .download-invoice {
+            background: #eee8fe;
+            color: #623efd;
+            border: 1px solid #bbb5ea;
+            border-radius: 5px;
+            padding: 0.35rem 1rem;
+            margin-left: 4px;
+            cursor: pointer;
+            font-size: 0.97rem;
+            transition: background .2s;
+        }
+        .download-invoice:hover {
+            background: #623efd;
+            color: #fff;
+        }
+
+        @media (max-width: 600px) {
+            .dashboard {
+                padding: 1rem 0.4rem;
+            }
+            .profile-summary {
+                flex-direction: column;
+                gap: 12px;
+                padding: 1rem;
+            }
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">HomEase</div>
-        <ul class="nav-links">
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="login.html">Logout</a></li>
-        </ul>
-    </nav>
-    <section class="dashboard">
-        <h1>Welcome, [User Name]</h1>
+
+    <!-- Navigation Header (keep unchanged) -->
+    <header class="navbar">
+        <div class="navbar-content">
+            <div class="logo">
+                <span><img src="../assets/images/logo.png" alt=""></span>
+            </div>
+            <nav class="nav-menu">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="#" class="nav-link">Blog</a>
+            </nav>
+            <div class="navbar-right">
+                <a href="login.html" class="cta-btn">Login</a>
+                    <span class="notification-bell" id="notifBell">
+                    <span class="bell-icon"><i class="fa-regular fa-bell"></i></span>
+                    <span class="notif-count" id="notifCount">2</span>
+                    <div class="notif-dropdown" id="notifDropdown">
+                        <ul>
+                            <li>New booking confirmed for 23 Oct</li>
+                            <li>Profile updated successfully</li>
+                        </ul>
+                    </div>
+                </span> 
+            </div>
+        </div>
+    </header>
+
+ <section class="dashboard">
+        <div class="dashboard-header">
+            <h1>Welcome, John Doe</h1>
+            <button class="edit-btn" id="openProfileEdit"><i class="fas fa-user-edit"></i> Edit Profile</button>
+        </div>
+        <div class="profile-summary">
+            <div class="profile-details">
+                <strong>Name:</strong> John Doe<br>
+                <strong>Address:</strong> 123 Street Name, Mumbai, 400001<br>
+                <strong>Phone:</strong> +91 9999999999
+            </div>
+        </div>
+        <!-- Recommended Services -->
+        <div class="recommended-section">
+            <div class="recommended-title"><i class="fa-solid fa-hand-sparkles"></i> Recommended Services</div>
+            <div class="recommended-list">
+                <div class="recommended-box"><i class="fa-solid fa-bolt"></i> Electrician</div>
+                <div class="recommended-box"><i class="fa-solid fa-paint-roller"></i> Painting</div>
+                <div class="recommended-box"><i class="fa-solid fa-faucet"></i> Plumbing</div>
+                <div class="recommended-box"><i class="fa-solid fa-snowflake"></i> AC Repair</div>
+            </div>
+        </div>
         <h2>Current & Past Bookings</h2>
         <div class="bookings">
-            <!-- Booking list to be filled dynamically -->
             <div class="booking-card">
-                <span>Service: Plumbing</span>
-                <span>Date: 2025-10-20</span>
-                <span>Status: Pending</span>
-                <button class="btn-secondary">Cancel</button>
-                <button class="btn-secondary">Reschedule</button>
+                <div class="booking-info">
+                    <span><b>Service:</b> Plumbing</span>
+                    <span><b>Date:</b> 2025-10-20</span>
+                    <span><b>Status:</b> Pending</span>
+                </div>
+                <div class="booking-actions">
+                    <button>Cancel</button>
+                    <button>Reschedule</button>
+                    <button class="download-invoice"><i class="fa-solid fa-file-arrow-down"></i> Invoice</button>
+                </div>
             </div>
-            <!-- More bookings as needed -->
+            <!-- More booking cards as needed -->
         </div>
-        <h2>Edit Profile</h2>
-        <form class="edit-profile-form">
-            <label>Name: <input type="text" value="[User Name]"></label>
-            <label>Address: <input type="text" value="[User Address]"></label>
-            <label>Phone: <input type="text" value="[User Phone]"></label>
-            <button type="submit" class="btn-primary">Save Changes</button>
-        </form>
     </section>
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 HomEase. All rights reserved.</p>
+
+    <!-- Edit Profile Modal unchanged -->
+    <div class="modal-backdrop" id="modalBackdrop">
+        <div class="profile-modal">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <h2>Edit Profile</h2>
+            <form id="editProfileForm">
+                <label for="editName">Name</label>
+                <input type="text" id="editName" value="John Doe">
+                <label for="editAddress">Address</label>
+                <input type="text" id="editAddress" value="123 Street Name, Mumbai, 400001">
+                <label for="editPhone">Phone</label>
+                <input type="text" id="editPhone" value="+91 9999999999">
+                <button type="submit" class="btn-modal">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="../assets/images/logo_white.png" alt="">
+                    <p>Your trusted partner for all handyman services.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Office</h4>
+                    <ul>
+                        <li>Bhavan's Campus, Old D N Nagar, Munshi Nagar, Andheri (W), 400-058</li>
+                        <li><a href="mailto:info@homeease.com">info@homeease.com</a></li>
+                        <li><a href="tel:+917208248380">+91 7208248380</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="../index.html#about">About Us</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Professionals</h4>
+                    <ul>
+                        <li><a href="pro_login.html">Login as Professional</a></li>
+                        <li><a href="contact.html">Contact</a></li>  
+                    </ul>    
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/" aria-label="Facebook" ><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.twitter.com/" aria-label="Twitter" ><i class="fa-brands fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/" aria-label="Instagram" ><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/" aria-label="LinkedIn" ><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 HomEase. All rights reserved.</p>
+            </div>
         </div>
     </footer>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    <script src="../script.js"></script>
+        <script>
+ const modal = document.getElementById('modalBackdrop');
+        document.getElementById('openProfileEdit').onclick = () => modal.classList.add('active');
+        document.getElementById('closeModal').onclick = () => modal.classList.remove('active');
+        document.getElementById('editProfileForm').onsubmit = function(e) {
+            e.preventDefault();
+            modal.classList.remove('active');
+        };
+
+        // Notification bell logic
+        const notifBell = document.getElementById('notifBell');
+        const notifDropdown = document.getElementById('notifDropdown');
+        notifBell.onclick = (e) => {
+            e.stopPropagation();
+            notifDropdown.classList.toggle('active');
+        };
+        document.body.onclick = () => notifDropdown.classList.remove('active');
+
+        // Chat widget logic
+        const chatBtn = document.getElementById('chatBtn');
+        const chatWidget = document.getElementById('chatWidget');
+        chatBtn.onclick = () => chatWidget.classList.toggle('active');
+        document.getElementById('chatSend').onclick = function() {
+            const input = document.getElementById('chatInput');
+            if (input.value.trim() !== "") {
+                document.getElementById('chatBody').innerHTML += `<div>User: ${input.value}</div>`;
+                input.value = "";
+            }
+        };
+
+        // Invoice download (simulate download)
+        document.querySelectorAll('.download-invoice').forEach(function(btn){
+            btn.onclick = function(){
+                alert("Invoice downloading (simulate PDF)...");
+                // In real usage, open or trigger download for actual invoice PDF
+            };
+        });
+    </script>
 </body>
 </html>
