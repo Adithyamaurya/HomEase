@@ -4,6 +4,8 @@ const serviceDetails = {
         title: 'Plumbing Services',
         icon: '🔧',
         description: 'Our expert plumbers handle everything from minor repairs to complete system installations.',
+        images: ['../assets/images/1-5.jpg', 'plumbing2.jpg', 'plumbing3.jpg'],
+        cost: 199,
         features: [
             'Leak detection and repair',
             'Pipe installation and replacement',
@@ -17,6 +19,8 @@ const serviceDetails = {
         title: 'Electrical Services',
         icon: '⚡',
         description: 'Professional electrical work performed by certified technicians.',
+        images: ['electrical1.jpg', 'electrical2.jpg', 'electrical3.jpg'],
+        cost: 99,
         features: [
             'Outlet and switch installation',
             'Lighting installation and repair',
@@ -30,6 +34,8 @@ const serviceDetails = {
         title: 'Carpentry Services',
         icon: '🪛',
         description: 'Expert carpentry for all your woodworking needs.',
+        images: ['carpentry1.jpg', 'carpentry2.jpg', 'carpentry3.jpg'],
+        cost: 299,
         features: [
             'Custom furniture building',
             'Shelving and storage solutions',
@@ -43,6 +49,8 @@ const serviceDetails = {
         title: 'Painting Services',
         icon: '🎨',
         description: 'Professional painting services for interior and exterior projects.',
+        images: ['painting1.jpg', 'painting2.jpg', 'painting3.jpg'],
+        cost: 149,
         features: [
             'Interior wall painting',
             'Exterior house painting',
@@ -56,6 +64,8 @@ const serviceDetails = {
         title: 'Flooring Services',
         icon: '🏗️',
         description: 'Quality flooring solutions for any room.',
+        images: ['flooring1.jpg', 'flooring2.jpg', 'flooring3.jpg'],
+        cost: 199,
         features: [
             'Hardwood flooring installation',
             'Laminate and vinyl flooring',
@@ -69,6 +79,8 @@ const serviceDetails = {
         title: 'Home Renovation',
         icon: '🏠',
         description: 'Complete home renovation services to transform your space.',
+        images: ['renovation1.jpg', 'renovation2.jpg', 'renovation3.jpg'],
+        cost: 299,
         features: [
             'Kitchen remodeling',
             'Bathroom renovation',
@@ -76,6 +88,66 @@ const serviceDetails = {
             'Basement finishing',
             'Full home makeovers',
             'Custom design consultation'
+        ]
+    },
+    salon: {
+        title: 'Salon Services',
+        icon: '💇',
+        description: 'Professional salon services for all your beauty needs.',
+        images: ['salon1.jpg', 'salon2.jpg', 'salon3.jpg'],
+        cost: 99,
+        features: [
+            'Haircuts and styling',
+            'Hair coloring and highlights',
+            'Hair treatments',
+            'Makeup services',
+            'Nail care',
+            'Facial and skincare'
+        ]
+    },
+    moving: {
+        title: 'Moving Services',
+        icon: '🚚',
+        description: 'Professional moving services to relocate your belongings.',
+        images: ['moving1.jpg', 'moving2.jpg', 'moving3.jpg'],
+        cost: 199,
+        features: [
+            'Local and long-distance moves',
+            'Packing and unpacking services',
+            'Furniture disassembly and reassembly',
+            'Loading and unloading',
+            'Moving coordination',
+            'Storage solutions'
+        ]
+    },
+    pest: {
+        title: 'Pest Control',
+        icon: '🦟',
+        description: 'Effective pest control solutions to keep your home safe.',
+        images: ['pest1.jpg', 'pest2.jpg', 'pest3.jpg'],
+        cost: 99,
+        features: [
+            'Rodent control',
+            'Insect extermination',
+            'Termite treatment',
+            'Wasp and bee removal',
+            'Flea and tick control',
+            'Integrated pest management'
+        ]
+    },
+    vehicle: {
+        title: 'Vehicle cleaning',
+        icon: '🚗',
+        description: 'Professional vehicle cleaning services to keep your car looking its best.',
+        images: ['vehicle1.jpg', 'vehicle2.jpg', 'vehicle3.jpg'],
+        cost: 199,
+        features: [
+            'Interior and exterior cleaning',
+            'Waxing and polishing',
+            'Engine degreasing',
+            'Tire and wheel cleaning',
+            'Interior upholstery cleaning',
+            'Window and glass cleaning'
         ]
     }
 };
@@ -91,22 +163,146 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (contentDiv) {
             contentDiv.innerHTML = `
-                <div class="service-detail-card">
-                    <div class="service-detail-icon ${service}">${details.icon}</div>
-                    <div class="service-detail-content">
-                        <h2>${details.title}</h2>
-                        <p>${details.description}</p>
-                        <h3>What We Offer:</h3>
-                        <ul>
-                            ${details.features.map(feature => `<li>${feature}</li>`).join('')}
-                        </ul>
-                        <button class="btn btn-primary">Book This Service</button>
+            <div class="service-detail-main">
+                <div class="service-detail-section">
+                    <div class="slider-img-list" id="sliderImgs">
+                        <img src="${details.images[0]}" alt="${details.title} 1" class="slider-img active">
+                        <img src="${details.images[1]}" alt="${details.title} 2" class="slider-img">
+                        <img src="${details.images[2]}" alt="${details.title} 3" class="slider-img">
+                    </div>
+                    <div class="slider-controls" id="sliderDots">
+                        <span class="slider-control-dot active" data-index="0"></span>
+                        <span class="slider-control-dot" data-index="1"></span>
+                        <span class="slider-control-dot" data-index="2"></span>
                     </div>
                 </div>
+                <div class="service-info-section">
+                    <div class="service-title">${details.title}</div>
+                    <div class="service-meta-list">
+                        <div class="service-meta">
+                            <i class="fa-regular fa-calendar-check"></i> Availability: <span>Mon-Sat, 9am-8pm</span>
+                        </div>
+                        <div class="service-meta">
+                            <i class="fa-solid fa-clock"></i> Timing: <span>On-Demand (30-60 mins arrival)</span>
+                        </div>
+                        <div class="service-meta">
+                            <div class="description">${details.description}</div>
+                        </div>
+                    </div>
+                    <div class="service-cost">₹${details.cost}</div>
+                    <button id="openBookNow" class="cta-btn btn-secondary" style="max-width: 150px;" data-service="${service}" data-price="${details.cost}"><i class="fa-solid fa-plus"></i> Book Now</button>
+                </div>
+            </div>
+            <div class="service-detail-below">
+                <div class="provider-info">
+                    <div class="provider-info-title">Service Provider</div>
+                    <img src="https://randomuser.me/api/portraits/men/52.jpg" class="provider-img" alt="Provider Photo">
+                    <div class="provider-meta"><b>Name:</b> Ramesh Sharma</div>
+                    <div class="provider-meta"><b>Rating:</b> 4.82 <span style="color:#ffb700;"><i class="fa-solid fa-star"></i></span></div>
+                    <div class="provider-meta"><b>Experience:</b> 9 years</div>
+                    <div class="provider-meta"><b>Jobs Done:</b> 350+</div>
+                </div>
+                <div class="service-description">
+                    <div class="service-desc-title">Features</div>
+                    <ul>
+                        ${details.features.map(f => `<li>${f}</li>`).join("")}
+                    </ul>
+                </div>
+                <div class="service-reviews">
+                    <div class="review-title">Reviews</div>
+                    <div class="review">
+                        <span class="review-user">Priya Mehta </span>
+                        <span class="review-rating"><i class="fa-solid fa-star"></i> 5.0</span>
+                        <div class="review-txt">Very punctual and neat work. Consultancy was free and charges were genuine.</div>
+                    </div>
+                    <div class="review">
+                        <span class="review-user">Vinod P.</span>
+                        <span class="review-rating"><i class="fa-solid fa-star"></i> 4.7</span>
+                        <div class="review-txt">Quickly solved the plumbing issue. Highly recommended for urgent repairs!</div>
+                    </div>
+                </div>
+            </div>
             `;
         }
     }
 
+    // Slider logic for dynamic HTML
+    setTimeout(function(){
+        const imgs = document.querySelectorAll('#sliderImgs img');
+        const dots = document.querySelectorAll('.slider-control-dot');
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                let idx = parseInt(dot.dataset.index);
+                imgs.forEach((im, i) => im.classList.toggle('active', i === idx));
+                dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+            });
+        });
+    }, 0);
+
+        document.getElementById('openBookNow').onclick = function(){
+        var serviceName = this.getAttribute('data-service');
+        var servicePrice = this.getAttribute('data-price');
+        document.getElementById('serviceType').value = serviceName;
+        document.getElementById('cost').value = servicePrice;
+        document.getElementById('cost').readOnly = true;
+        document.getElementById('serviceType').readOnly = true;
+        
+        // Set current time (format HH:MM)
+        var now = new Date();
+        var h = String(now.getHours()).padStart(2,'0');
+        var m = String(now.getMinutes()).padStart(2,'0');
+        document.getElementById('time').value = h + ":" + m;
+        // Current date
+        var y = now.getFullYear();
+        var mo = String(now.getMonth()+1).padStart(2,'0');
+        var d = String(now.getDate()).padStart(2,'0');
+        document.getElementById('date').value = `${y}-${mo}-${d}`;
+        
+        document.getElementById('bookModalBackdrop').style.display = "flex";
+        document.body.style.overflow = "hidden";
+        
+        };
+
+        document.getElementById('cancelBookModal').onclick = function(){
+        document.getElementById('bookModalBackdrop').style.display = "none";
+        document.body.style.overflow = "auto";
+        document.getElementById('modalStepBook').style.display = "block";
+        document.getElementById('modalStepCheckout').style.display = "none";
+        document.getElementById('bookingForm').reset();
+        };
+        // Checkout/payment mock
+        document.getElementById('paymentForm').onsubmit = function(e) {
+        e.preventDefault();
+        alert("Payment successful! Your booking is confirmed.");
+        document.getElementById('bookModalBackdrop').style.display = "none";
+        document.body.style.overflow = "auto";
+        };
+
+        document.getElementById('bookingForm').onsubmit = function(event) {
+  event.preventDefault();
+  // Show checkout step inside popup or redirect accordingly
+  document.getElementById('modalStepBook').style.display = "none";
+  document.getElementById('modalStepCheckout').style.display = "block";
+
+  // Fill summary box with the details
+  const service = document.getElementById('serviceType').value;
+  const date = document.getElementById('date').value;
+  const time = document.getElementById('time').value;
+  const address = document.getElementById('address').value;
+  const name = document.getElementById('name').value;
+  const phone = document.getElementById('phone').value;
+  const cost = document.getElementById('cost').value;
+
+  document.getElementById('summaryBox').innerHTML = `
+    <div><b>Service:</b> ${service}</div>
+    <div><b>Name:</b> ${name}</div>
+    <div><b>Date:</b> ${date}</div>
+    <div><b>Time:</b> ${time}</div>
+    <div><b>Address:</b> ${address}</div>
+    <div><b>Phone:</b> ${phone}</div>
+    <div><b>Total Cost:</b> ₹${cost}</div>
+  `;
+};
     // Form submission handlers
     const loginForm = document.querySelector('#loginForm form');
     if (loginForm) {
