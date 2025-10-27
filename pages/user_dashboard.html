@@ -151,41 +151,6 @@
             margin-left: 16px;
             cursor: pointer;
         }
-        .bell-icon {
-            font-size: 1.6rem;
-            color: #FF7700;
-        }
-        .notif-count {
-            position: absolute;
-            top: -7px; right: -7px;
-            background: #FE8600;
-            color: #fff;
-            font-size: 0.75rem;
-            padding: 2px 6px;
-        }
-        .notif-dropdown {
-            display: none;
-            position: absolute;
-            top: 36px; right: 0;
-            background: #fff;
-            border: 1px solid #ecddbe;
-            border-radius: 7px;
-            min-width: 230px;
-            z-index: 44;
-            box-shadow: 0 7px 20px rgba(180,170,150,0.13);
-        }
-        .notif-dropdown.active {
-            display: block;
-        }
-        .notif-dropdown ul { list-style: none; margin: 0; padding: 10px 0; }
-        .notif-dropdown li {
-            padding: 8px 18px;
-            color: #232943;
-            font-size: 0.99rem;
-            border-bottom: 1px solid #f5e7c8;
-        }
-        .notif-dropdown li:last-child { border-bottom: none; }
-
         .recommended-section {
             margin: 2rem 0 2rem 0;
         }
@@ -263,16 +228,6 @@
             </nav>
             <div class="navbar-right">
                 <a href="login.html" class="cta-btn">Login</a>
-                    <span class="notification-bell" id="notifBell">
-                    <span class="bell-icon"><i class="fa-regular fa-bell"></i></span>
-                    <span class="notif-count" id="notifCount">2</span>
-                    <div class="notif-dropdown" id="notifDropdown">
-                        <ul>
-                            <li>New booking confirmed for 23 Oct</li>
-                            <li>Profile updated successfully</li>
-                        </ul>
-                    </div>
-                </span> 
             </div>
         </div>
     </header>
@@ -293,7 +248,7 @@
         <div class="recommended-section">
             <div class="recommended-title"><i class="fa-solid fa-hand-sparkles"></i> Recommended Services</div>
             <div class="recommended-list">
-                <div class="recommended-box"><i class="fa-solid fa-bolt"></i> Electrician</div>
+                <div class="recommended-box"><i class="fa-solid fa-bolt"></i>Electrician</div>
                 <div class="recommended-box"><i class="fa-solid fa-paint-roller"></i> Painting</div>
                 <div class="recommended-box"><i class="fa-solid fa-faucet"></i> Plumbing</div>
                 <div class="recommended-box"><i class="fa-solid fa-snowflake"></i> AC Repair</div>
@@ -382,7 +337,7 @@
     <div class="cursor-outline"></div>
     <script src="../script.js"></script>
         <script>
- const modal = document.getElementById('modalBackdrop');
+        const modal = document.getElementById('modalBackdrop');
         document.getElementById('openProfileEdit').onclick = () => modal.classList.add('active');
         document.getElementById('closeModal').onclick = () => modal.classList.remove('active');
         document.getElementById('editProfileForm').onsubmit = function(e) {
@@ -390,26 +345,6 @@
             modal.classList.remove('active');
         };
 
-        // Notification bell logic
-        const notifBell = document.getElementById('notifBell');
-        const notifDropdown = document.getElementById('notifDropdown');
-        notifBell.onclick = (e) => {
-            e.stopPropagation();
-            notifDropdown.classList.toggle('active');
-        };
-        document.body.onclick = () => notifDropdown.classList.remove('active');
-
-        // Chat widget logic
-        const chatBtn = document.getElementById('chatBtn');
-        const chatWidget = document.getElementById('chatWidget');
-        chatBtn.onclick = () => chatWidget.classList.toggle('active');
-        document.getElementById('chatSend').onclick = function() {
-            const input = document.getElementById('chatInput');
-            if (input.value.trim() !== "") {
-                document.getElementById('chatBody').innerHTML += `<div>User: ${input.value}</div>`;
-                input.value = "";
-            }
-        };
 
         // Invoice download (simulate download)
         document.querySelectorAll('.download-invoice').forEach(function(btn){
@@ -417,6 +352,34 @@
                 alert("Invoice downloading (simulate PDF)...");
                 // In real usage, open or trigger download for actual invoice PDF
             };
+        });
+
+        // Cookie toggle logic
+        function getCookie(name) {
+            const m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+            return m ? decodeURIComponent(m[1]) : null;
+        }
+        function setCookie(name, value, seconds) {
+            const max = seconds ? ';max-age=' + seconds : '';
+            document.cookie = name + '=' + value + ';path=/' + max;
+        }
+        function deleteCookie(name) {
+            document.cookie = name + '=;path=/;max-age=0';
+        }
+        function refreshAuthUI() {
+            const authed = getCookie('logged_in') === '1';
+            document.querySelectorAll('.btn-login, .cta-btn.btn-login')
+                .forEach(el => el.style.display = authed ? 'none' : 'inline-flex');
+            document.querySelectorAll('.btn-logout')
+                .forEach(el => el.style.display = authed ? 'inline-flex' : 'none');
+        }
+        document.addEventListener('DOMContentLoaded', refreshAuthUI);
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.btn-logout');
+            if (!btn) return;
+            e.preventDefault();
+            deleteCookie('logged_in');
+            refreshAuthUI();
         });
     </script>
 </body>
