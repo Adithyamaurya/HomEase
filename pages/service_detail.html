@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Service Details - HomEase</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
 
@@ -15,61 +14,90 @@
     <header class="navbar">
         <div class="navbar-content">
             <div class="logo">
-                <span><img src="../assets/images/logo.png" alt=""></span>
+                <span><img src="../assets/images/logo.png" alt="HomEase logo" /></span>
             </div>
             <nav class="nav-menu">
                 <a href="../index.html" class="nav-link">Home</a>
-                <a href="/pages/services.html" class="nav-link active">Services</a>
+                <a href="services.html" class="nav-link active">Services</a>
+                <a href="contact.html" class="nav-link">Contact</a>
                 <a href="blog.html" class="nav-link">Blog</a>
             </nav>
             <div class="navbar-right">
-                <a href="login.html" class="cta-btn">Login</a>
+                <a href="login.html" class="cta-btn btn-login">Login</a>
+                <a href="#" class="btn-logout" style="display:none;">Logout</a>
             </div>
         </div>
     </header>
 
-    <!-- Service Detail Section -->
-    <section class="service-detail-page">
-        <div class="container">
-            <div id="serviceContent">
-                <!-- Content will be loaded by JavaScript -->
-            </div>
-        </div>
-    </section>
+    <main>
+    <div id="serviceContent"></div>
+    </main>
 
-    <!-- Pricing Section -->
-    <section class="pricing-section">
-        <div class="container">
-            <h2>Pricing</h2>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>Basic</h3>
-                    <p class="price">$99</p>
-                    <p>Perfect for small repairs</p>
-                    <button class="btn btn-secondary">Book Now</button>
-                </div>
-                <div class="pricing-card featured">
-                    <h3>Standard</h3>
-                    <p class="price">$199</p>
-                    <p>Most popular option</p>
-                    <button class="btn btn-primary">Book Now</button>
-                </div>
-                <div class="pricing-card">
-                    <h3>Premium</h3>
-                    <p class="price">$299+</p>
-                    <p>For complex projects</p>
-                    <button class="btn btn-secondary">Book Now</button>
-                </div>
-            </div>
+    <!-- BOOK & CHECKOUT POPUP MODAL -->
+<div class="modal-backdrop" id="bookModalBackdrop" style="display:none;">
+  <div class="modal-popup" id="bookModal">
+    <!-- Popup header -->
+    <div id="modalStepBook">
+      <h2>Book Your Service</h2>
+      <form id="bookingForm">
+        <!-- [Form as in previous answer, keep same fields, just style for popup] -->
+        <div class="form-group">
+            <label for="serviceType">Service</label>
+            <input type="text" id="serviceType" readonly>
         </div>
-    </section>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date" required />
+          </div>
+          <div class="form-group">
+            <label for="time">Time</label>
+            <input type="time" id="time" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="address">Service Address</label>
+          <textarea id="address" rows="2" required placeholder="Flat/Building, Area, City"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" required pattern="[0-9]{10,}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cost">Cost</label>
+          <input type="number" id="cost" readonly>
+        </div><div class="form-row" style="gap:16px;">
+            <button type="submit" class="book-btn"> Checkout</button>
+            <button type="button" id="cancelBookModal" class="cancel-btn" >Cancel</button>
+        </div>
+      </form>
+    </div>
+    <!-- Checkout step hidden by default -->
+    <div id="modalStepCheckout" style="display:none;">
+      <h2>Checkout & Payment</h2>
+      <div class="summary-box" id="summaryBox"></div>
+  <form id="paymentForm">
+    <div class="form-group" style="text-align: left; font-size: 1.1rem; font-weight: 600; margin-bottom: 18px;">
+            <label for="cod">Payment Method: Cash on Delivery</label>
+    </div>
+    <button type="submit" class="pay-btn">Confirm Booking</button>
+  </form>
+    </div>
+  </div>
+</div>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <img src="../assets/images/logo_white.png" alt="">
+                    <img src="../assets/images/logo_white.png" alt="HomEase logo white" />
                     <p>Your trusted partner for all handyman services.</p>
                 </div>
                 <div class="footer-section">
@@ -93,13 +121,13 @@
                     <h4>For Professionals</h4>
                     <ul>
                         <li><a href="pro_login.html">Login as Professional</a></li>
-                        <li><a href="#">Contact</a></li>  
-                    </ul>    
-                    <div style="" class="social-icons">
-                        <a href="https://www.facebook.com/" aria-label="Facebook" ><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="https://www.twitter.com/" aria-label="Twitter" ><i class="fa-brands fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/" aria-label="Instagram" ><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/" aria-label="LinkedIn" ><i class="fa-brands fa-linkedin-in"></i></a>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.twitter.com/" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
@@ -108,9 +136,44 @@
             </div>
         </div>
     </footer>
-<div class="cursor-dot"></div>
-<div class="cursor-outline"></div>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
 
     <script src="../script.js"></script>
+
+    <!-- Cookie-based Login/Logout toggle -->
+    <script>
+        function getCookie(name) {
+            const m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+            return m ? decodeURIComponent(m[1]) : null;
+        }
+        function setCookie(name, value, seconds) {
+            const max = seconds ? ';max-age=' + seconds : '';
+            document.cookie = name + '=' + value + ';path=/' + max;
+        }
+        function deleteCookie(name) {
+            document.cookie = name + '=;path=/;max-age=0';
+        }
+        function refreshAuthUI() {
+            const authed = getCookie('logged_in') === '1';
+            document.querySelectorAll('.btn-login, .cta-btn.btn-login')
+                .forEach(el => el.style.display = authed ? 'none' : 'inline-flex');
+            document.querySelectorAll('.btn-logout')
+                .forEach(el => el.style.display = authed ? 'inline-flex' : 'none');
+        }
+        document.addEventListener('DOMContentLoaded', refreshAuthUI);
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.btn-logout');
+            if (!btn) return;
+            e.preventDefault();
+            deleteCookie('logged_in');
+            refreshAuthUI();
+        });
+
+
+
+    </script>
+
 </body>
 </html>
