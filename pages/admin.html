@@ -1,59 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Admin Panel | HomEase</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Login / Register - HomEase</title>
+<link rel="stylesheet" href="../assets/css/style.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+  section.admin-panel {
+    max-width: 1150px;
+    margin: 38px auto 70px auto;
+    padding: 0 18px;
+  }
+  section.admin-panel h1 {
+    color: #FF7700;
+    font-weight: 700;
+    margin-bottom: 28px;
+  }
+  section.admin-panel h2 {
+    margin-top: 36px;
+    margin-bottom: 14px;
+    border-bottom: 2px solid #FF7700;
+    padding-bottom: 6px;
+    font-weight: 600;
+    color: #312d3e;
+  }
+  .user-list, .pro-list, .bookings {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .user-card, .pro-card, .booking-card {
+    background: #fff;
+    padding: 14px 22px;
+    box-shadow: 0 8px 26px rgba(255, 119, 0, 0.12);
+    border-radius: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    font-size: 1rem;
+    color: #222;
+  }
+  .user-card span, .pro-card span, .booking-card span {
+    flex: 1 1 180px;
+  }
+  .btn-secondary {
+    background-color: #eee8fe;
+    border: none;
+    color: #623efd;
+    padding: 8px 18px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.22s;
+  }
+  .btn-secondary:hover {
+    background-color: #5234d4;
+    color: #fff;
+  }
+  .btn-primary {
+    background-color: #FF7700;
+    color: white;
+    padding: 10px 20px;
+    font-weight: 700;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    margin-top: 18px;
+  }
+  .btn-primary:hover {
+    background-color: #e6650d;
+  }
+  footer {
+    background-color: #222042;
+    color: #ccc;
+    text-align: center;
+    padding: 14px 0;
+  }
+  @media (max-width: 700px) {
+    .user-card, .pro-card, .booking-card {
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 0.95rem;
+    }
+  }
+</style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">HomEase</div>
-        <ul class="nav-links">
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="admin.html">Admin Panel</a></li>
-        </ul>
-    </nav>
-    <section class="admin-panel">
-        <h1>Admin Management</h1>
-        <h2>All Users</h2>
-        <div class="user-list">
-            <!-- Dynamically render user info -->
-            <div class="user-card">
-                <span>Name: Rahul</span>
-                <span>Email: rahul@example.com</span>
-                <span>Phone: 9830112233</span>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="navbar-content">
+            <div class="logo">
+                <span><img src="../assets/images/logo.png" alt=""></span>
             </div>
-            <!-- More users -->
+            <nav class="nav-menu">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="admin.html" class="nav-link active">Admin</a>
+            </nav>
         </div>
-        <h2>All Professionals</h2>
-        <div class="pro-list">
-            <div class="pro-card">
-                <span>Name: Priya</span>
-                <span>Email: priya@email.com</span>
-                <span>Status: Pending</span>
-                <button class="btn-secondary">Approve</button>
-                <button class="btn-secondary">Reject</button>
-            </div>
-            <!-- More professionals -->
-        </div>
-        <h2>All Bookings</h2>
-        <div class="bookings">
-            <div class="booking-card">
-                <span>User: Rahul</span>
-                <span>Service: Plumbing</span>
-                <span>Status: Accepted</span>
-            </div>
-            <!-- More bookings -->
-        </div>
-        <h2>Manage Services</h2>
-        <button class="btn-primary">Add New Service</button>
-        <!-- List and manage services here -->
-    </section>
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 HomEase. All rights reserved.</p>
-        </div>
-    </footer>
+    </header>
+
+<section class="admin-panel">
+  <h1>Admin Management</h1>
+
+  <h2>All Users</h2>
+  <div class="user-list" id="userList">
+    <div class="user-card">
+      <span>Name: Rahul</span>
+      <span>Email: rahul@example.com</span>
+      <span>Phone: 9830112233</span>
+    </div>
+    <!-- Add more users dynamically -->
+  </div>
+
+  <h2>All Professionals</h2>
+  <div class="pro-list" id="proList">
+    <div class="pro-card">
+      <span>Name: Priya</span>
+      <span>Email: priya@email.com</span>
+      <span>Status: Pending</span>
+      <button class="btn-secondary" onclick="approvePro(this)">Approve</button>
+      <button class="btn-secondary" onclick="rejectPro(this)">Reject</button>
+    </div>
+    <!-- Add more pros dynamically -->
+  </div>
+
+  <h2>All Bookings</h2>
+  <div class="bookings" id="bookingList">
+    <div class="booking-card">
+      <span>User: Rahul</span>
+      <span>Service: Plumbing</span>
+      <span>Status: Accepted</span>
+    </div>
+    <!-- Add more bookings dynamically -->
+  </div>
+
+  <h2>Manage Services</h2>
+  <button class="btn-primary" onclick="addNewService()">Add New Service</button>
+  <!-- Service management UI to be added -->
+</section>
+
+<script>
+function approvePro(button) {
+  const card = button.closest(".pro-card");
+  card.querySelector("span:nth-child(3)").textContent = "Status: Approved";
+  alert("Professional approved");
+  // Link to backend API for real approval flow
+}
+
+function rejectPro(button) {
+  const card = button.closest(".pro-card");
+  card.querySelector("span:nth-child(3)").textContent = "Status: Rejected";
+  alert("Professional rejected");
+  // Link to backend API for real rejection
+}
+
+function addNewService() {
+  alert("Add new service feature coming soon!");
+}
+</script>
+
 </body>
 </html>
