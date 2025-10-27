@@ -1,39 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Professional Dashboard | HomeManager</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Login / Register - HomEase</title>
+<link rel="stylesheet" href="../assets/css/style.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    .dashboard {
+        max-width: 1100px;
+        margin: 36px auto 60px auto;
+        padding: 0 16px;
+    }
+    .dashboard h1 {
+        color: #ff7700;
+        margin-bottom: 28px;
+        font-weight: 700;
+    }
+    .dashboard h2 {
+        color: #231f20;
+        margin-top: 30px;
+        margin-bottom: 16px;
+        font-weight: 600;
+        border-bottom: 2px solid #ff7700;
+        padding-bottom: 6px;
+    }
+    .jobs {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .job-card {
+        background: white;
+        border-radius: 10px;
+        padding: 18px 24px;
+        box-shadow: 0 8px 23px rgba(255, 119, 0, 0.18);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 14px;
+    }
+    .job-card span {
+        flex: 1 1 180px;
+        font-size: 1rem;
+        color: #232943;
+    }
+    .button-group {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+ 
+    @media (max-width: 650px) {
+        .job-card {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .button-group {
+            width: 100%;
+            justify-content: flex-start;
+            gap: 10px;
+        }
+        .btn-secondary {
+            min-width: 140px;
+        }
+    }
+</style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">HomEase</div>
-        <ul class="nav-links">
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="pro_login.html">Logout</a></li>
-        </ul>
+
+<!-- Navigation Header -->
+<header class="navbar">
+  <div class="navbar-content">
+    <div class="logo">
+      <span><img src="/assets/images/logo.png" alt="HomEase Logo" /></span>
+    </div>
+    <nav class="nav-menu">
+      <a href="../index.html" class="nav-link ">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="blog.html" class="nav-link">Blog</a>
     </nav>
-    <section class="dashboard">
-        <h1>Welcome, [Professional Name]</h1>
-        <h2>Assigned Jobs</h2>
-        <div class="jobs">
-            <div class="job-card">
-                <span>Service: Cleaning</span>
-                <span>Date: 2025-10-15</span>
-                <span>Status: Pending</span>
-                <button class="btn-secondary">Accept</button>
-                <button class="btn-secondary">Reject</button>
-                <button class="btn-secondary">Mark Completed</button>
+    <div class="navbar-right">
+      <a href="login.html" class="cta-btn">Login</a>
+    </div>
+  </div>
+</header>
+
+<section class="dashboard">
+    <h1>Welcome, [Professional Name]</h1>
+
+    <h2>Assigned Jobs</h2>
+    <div class="jobs" id="assignedJobsContainer">
+        <div class="job-card">
+            <span>Service: Cleaning</span>
+            <span>Date: 2025-10-15</span>
+            <span>Status: Pending</span>
+            <div class="button-group">
+                <button class="cta-btn btn-secondary" onclick="acceptJob(this)">Accept</button>
+                <button class="cta-btn btn-secondary" onclick="rejectJob(this)">Reject</button>
+                <button class="cta-btn btn-secondary" onclick="markCompleted(this)">Mark Completed</button>
             </div>
-            <!-- More job cards as needed -->
         </div>
-    </section>
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 HomeManager. All rights reserved.</p>
+        <!-- Additional jobs loaded dynamically -->
+    </div>
+
+    <h2>Past Jobs</h2>
+    <div class="jobs" id="pastJobsContainer">
+        <div class="job-card">
+            <span>Service: Plumbing</span>
+            <span>Date: 2025-09-29</span>
+            <span>Status: Completed</span>
+        </div>
+        <!-- Additional completed jobs -->
+    </div>
+</section>
+
+  <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="../assets/images/logo_white.png" alt="">
+                    <p>Your trusted partner for all handyman services.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Office</h4>
+                    <ul>
+                        <li>Bhavan's Campus, Old D N Nagar, Munshi Nagar, Andheri (W), 400-058</li>
+                        <li><a href="mailto:info@homeease.com">info@homeease.com</a></li>
+                        <li><a href="tel:+917208248380">+91 7208248380</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="../index.html#about">About Us</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Professionals</h4>
+                    <ul>
+                        <li><a href="pro_login.html">Login as Professional</a></li>
+                        <li><a href="contact.html">Contact</a></li>  
+                    </ul>    
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/" aria-label="Facebook" ><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.twitter.com/" aria-label="Twitter" ><i class="fa-brands fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/" aria-label="Instagram" ><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/" aria-label="LinkedIn" ><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 HomEase. All rights reserved.</p>
+            </div>
         </div>
     </footer>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    <script src="../script.js"></script>
+    
+<script>
+    function acceptJob(button) {
+        const card = button.closest(".job-card");
+        card.querySelector("span:nth-child(3)").textContent = "Status: Accepted";
+        // TODO: call backend API to update job status
+        alert("Job accepted");
+    }
+    function rejectJob(button) {
+        const card = button.closest(".job-card");
+        card.querySelector("span:nth-child(3)").textContent = "Status: Rejected";
+        // TODO: call backend API to update job status
+        alert("Job rejected");
+    }
+    function markCompleted(button) {
+        const card = button.closest(".job-card");
+        card.querySelector("span:nth-child(3)").textContent = "Status: Completed";
+        // TODO: call backend API to update job status
+        alert("Job marked as completed");
+    }
+</script>
 </body>
 </html>
