@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blogs - HomEase</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 <body>
 
@@ -14,7 +14,7 @@
     <header class="navbar">
         <div class="navbar-content">
             <div class="logo">
-                <span><img src="../assets/images/logo.png" alt=""></span>
+                <span><img src="../assets/images/logo.png" alt="HomEase Logo" /></span>
             </div>
             <nav class="nav-menu">
                 <a href="../index.html" class="nav-link">Home</a>
@@ -23,19 +23,48 @@
                 <a href="#" class="nav-link active">Blog</a>
             </nav>
             <div class="navbar-right">
-                <a href="login.html" class="cta-btn">Login</a>
+                <!-- Both buttons for toggle -->
+                <a href="login.html" class="cta-btn btn-login">Login</a>
+                <a href="#" class="btn-logout" style="display:none;">Logout</a>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="display-hero" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/images/blog.jpg') no-repeat center center/cover;
-">
+    <section class="display-hero" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/images/blog.jpg') no-repeat center center/cover;">
         <div class="display-hero-content">
             <h1 class="display-heading">Services</h1>
             <i class="fas fa-chevron-down"></i>
         </div>
     </section>
+
+    <main class="blog-container" style="max-width: 1100px; margin: 48px auto; padding: 0 18px; font-family: 'Segoe UI', Arial, sans-serif;">
+        <h1 style="color: #FF7700; font-weight: 700; margin-bottom: 32px;">Latest Blogs</h1>
+        
+        <article class="blog-post" style="background: #fff; border-radius: 14px; box-shadow: 0 8px 30px rgba(255, 119, 0, 0.1); padding: 22px 28px; margin-bottom: 36px;">
+            <h2 style="color: #222042; margin-bottom: 14px;">How to Choose the Right Home Service Professional</h2>
+            <p style="color: #444; font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">
+            Finding a trusted professional for your home repair or maintenance can be daunting. This guide helps you identify quality, reliability, and fair pricing.
+            </p>
+            <a href="https://www.hdfcergo.com/blogs/home-insurance/regular-home-maintenance" style="color: #FF7700; font-weight: 600; text-decoration: none;">Read More &rarr;</a>
+        </article>
+
+        <article class="blog-post" style="background: #fff; border-radius: 14px; box-shadow: 0 8px 30px rgba(255, 119, 0, 0.1); padding: 22px 28px; margin-bottom: 36px;">
+            <h2 style="color: #222042; margin-bottom: 14px;">Benefits of Regular Home Maintenance</h2>
+            <p style="color: #444; font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">
+            Regular maintenance extends the life of your home's essential systems and reduces costly emergency repairs. Learn the must-do tasks.
+            </p>
+            <a href="https://www.hdfcergo.com/blogs/home-insurance/regular-home-maintenance" style="color: #FF7700; font-weight: 600; text-decoration: none;">Read More &rarr;</a>
+        </article>
+
+        <article class="blog-post" style="background: #fff; border-radius: 14px; box-shadow: 0 8px 30px rgba(255, 119, 0, 0.1); padding: 22px 28px;">
+            <h2 style="color: #222042; margin-bottom: 14px;">Top Trends in Home Service Technology for 2025</h2>
+            <p style="color: #444; font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">
+            Discover the latest innovations improving home repairs, bookings, and customer satisfaction in the home services industry.
+            </p>
+            <a href="https://www.hdfcergo.com/blogs/home-insurance/regular-home-maintenance" style="color: #FF7700; font-weight: 600; text-decoration: none;">Read More &rarr;</a>
+        </article>
+    </main>
 
 
     <!-- Footer -->
@@ -43,7 +72,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <img src="../assets/images/logo_white.png" alt="">
+                    <img src="../assets/images/logo_white.png" alt="HomEase Logo White" />
                     <p>Your trusted partner for all handyman services.</p>
                 </div>
                 <div class="footer-section">
@@ -67,13 +96,13 @@
                     <h4>For Professionals</h4>
                     <ul>
                         <li><a href="pro_login.html">Login as Professional</a></li>
-                        <li><a href="contact.html">Contact</a></li>  
-                    </ul>    
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
                     <div class="social-icons">
-                        <a href="https://www.facebook.com/" aria-label="Facebook" ><i class="fa-brands fa-facebook-f"></i></a>
-                        <a href="https://www.twitter.com/" aria-label="Twitter" ><i class="fa-brands fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/" aria-label="Instagram" ><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/" aria-label="LinkedIn" ><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://www.facebook.com/" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.twitter.com/" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
@@ -82,8 +111,41 @@
             </div>
         </div>
     </footer>
+
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
+
     <script src="../script.js"></script>
+
+    <!-- Cookie-based Login/Logout toggle -->
+    <script>
+        function getCookie(name) {
+            const m = document.cookie.match(new RegExp('(?:^|; )'+ name + '=([^;]*)'));
+            return m ? decodeURIComponent(m[1]) : null;
+        }
+        function setCookie(name, value, seconds) {
+            const max = seconds ? ';max-age=' + seconds : '';
+            document.cookie = name + '=' + value + ';path=/' + max;
+        }
+        function deleteCookie(name) {
+            document.cookie = name + '=;path=/;max-age=0';
+        }
+        function refreshAuthUI() {
+            const authed = getCookie('logged_in') === '1';
+            document.querySelectorAll('.btn-login, .cta-btn.btn-login')
+                .forEach(el => el.style.display = authed ? 'none' : 'inline-flex');
+            document.querySelectorAll('.btn-logout')
+                .forEach(el => el.style.display = authed ? 'inline-flex' : 'none');
+        }
+        document.addEventListener('DOMContentLoaded', refreshAuthUI);
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.btn-logout');
+            if (!btn) return;
+            e.preventDefault();
+            deleteCookie('logged_in');
+            refreshAuthUI();
+        });
+    </script>
+
 </body>
 </html>
