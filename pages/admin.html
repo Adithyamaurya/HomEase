@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 <style>
+
   section.admin-panel {
     max-width: 1150px;
     margin: 38px auto 70px auto;
@@ -108,12 +109,21 @@
 
   <h2>All Users</h2>
   <div class="user-list" id="userList">
-    <div class="user-card">
-      <span>Name: Rahul</span>
-      <span>Email: rahul@example.com</span>
-      <span>Phone: 9830112233</span>
-    </div>
-    <!-- Add more users dynamically -->
+      <?php
+      $sql = "SELECT full_name, email, phone FROM users ORDER BY created_at DESC";
+      $result = $conn->query($sql);
+      if ($result && $result->num_rows > 0) {
+          while($row = $result->fetch_assoc()) {
+              echo '<div class="user-card">';
+              echo '<span>Name: ' . htmlspecialchars($row['full_name']) . '</span>';
+              echo '<span>Email: ' . htmlspecialchars($row['email']) . '</span>';
+              echo '<span>Phone: ' . htmlspecialchars($row['phone']) . '</span>';
+              echo '</div>';
+          }
+      } else {
+          echo '<div class="user-card">No user records found.</div>';
+      }
+      ?>
   </div>
 
   <h2>All Professionals</h2>
@@ -168,4 +178,3 @@ function addNewService() {
 
 </body>
 </html>
-
