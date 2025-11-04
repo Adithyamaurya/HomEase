@@ -7,6 +7,60 @@
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+      <style>
+        .faq-accordion {
+        background: #fafaf4;
+        border-radius: 11px;
+        overflow: hidden;
+        box-shadow: 0 3px 22px rgba(40,30,8,0.06);
+        border: 1px solid #f2ebd7;
+        }
+        .faq-item + .faq-item {
+        border-top: 1px solid #f2ebd7;
+        }
+        .faq-question {
+        width: 100%;
+        background: none;
+        border: none;
+        text-align: left;
+        padding: 28px 38px 28px 38px;
+        font-size: 1.36rem;
+        color: #181710;
+        font-weight: 500;
+        cursor: pointer;
+        outline: none;
+        transition: background 0.15s;
+        position: relative;
+        }
+        .faq-question::before {
+        content: "+";
+        position: absolute;
+        left: 12px;
+        top: 28%;
+        font-size: 2.1rem;
+        color: #9d8c65;
+        transition: color 0.2s;
+        }
+        .faq-item.active .faq-question::before {
+        content: "–";
+        color: #FF7700;
+        }
+        .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        background: #fff;
+        color: #585757;
+        padding: 0 38px;
+        font-size: 1.08rem;
+        transition: max-height 0.58s cubic-bezier(.61,1.01,.37,1.0);
+        }
+        .faq-item.active .faq-answer {
+        max-height: 200px;
+        padding-bottom: 22px;
+        padding-top: 20px;
+        transition: max-height 0.38s;
+        }
+        </style>
 </head>
 <body>
 
@@ -38,6 +92,7 @@
         </div>
     </section>
 
+    <!--  -->
     <main class="blog-container" style="max-width: 1100px; margin: 48px auto; padding: 0 18px; font-family: 'Segoe UI', Arial, sans-serif;">
         <h1 style="color: #FF7700; font-weight: 700; margin-bottom: 32px;">Latest Blogs</h1>
         
@@ -65,6 +120,59 @@
             <a href="https://www.hdfcergo.com/blogs/home-insurance/regular-home-maintenance" style="color: #FF7700; font-weight: 600; text-decoration: none;">Read More &rarr;</a>
         </article>
     </main>
+
+        <!-- FAQ Section -->
+    <section class="faq-container" style="max-width:900px; margin:40px auto;">
+        <h2 style="font-size:2rem; color:#27231c; margin-bottom:32px;">Frequently Asked Questions</h2>
+        
+        <div class="faq-accordion">
+            <div class="faq-item active">
+            <button class="faq-question" aria-expanded="true">What services does HomEase provide?</button>
+            <div class="faq-answer">
+                <p>HomEase offers a range of home services including plumbing, electrical works, cleaning, carpentry, painting, AC servicing, appliance repair, pest control, and more—all vetted for safety and quality.</p>
+            </div>
+            </div>
+
+            <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">When should I book a professional from HomEase?</button>
+            <div class="faq-answer">
+                <p>You should book when you notice a maintenance issue or want to schedule preventive care, cleaning, or upgrades. Immediate booking is available for urgent repairs.</p>
+            </div>
+            </div>
+
+            <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">How do I know a professional is trustworthy?</button>
+            <div class="faq-answer">
+                <p>All HomEase professionals are background-verified and customer-rated. You can view ratings, reviews, and service history before booking.</p>
+            </div>
+            </div>
+
+            <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">Is HomEase affordable?</button>
+            <div class="faq-answer">
+                <p>Yes, all services are transparently priced. You get upfront estimates, and only pay for completed work, with no hidden charges.</p>
+            </div>
+            </div>
+        </div>
+    </section>
+      
+
+        <!-- Minimal JS for toggling (add before </body>): -->
+        <script>
+        document.querySelectorAll('.faq-question').forEach(function(btn){
+        btn.onclick = function() {
+            document.querySelectorAll('.faq-item').forEach(function(item){
+            if(item.contains(btn)) {
+                item.classList.toggle('active');
+                btn.setAttribute('aria-expanded', item.classList.contains('active'));
+            } else {
+                item.classList.remove('active');
+                item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+            }
+            });
+        };
+        });
+        </script>
 
 
     <!-- Footer -->
