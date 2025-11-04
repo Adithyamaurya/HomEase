@@ -18,12 +18,7 @@ home-management-system/
 │       ├── electrical.png
 │       ├── painting.png
 │       ├── user1.png
-│       └── logo.png
-│
-├── includes/                          
-│   ├── db_connect.php                 
-│   ├── header.php                     
-│   └── footer.php                     
+│       └── logo.png                
 │
 ├── pages/                             
 │   ├── services/                      
