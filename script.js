@@ -2,9 +2,8 @@
 const serviceDetails = {
     plumbing: {
         title: 'Plumbing Services',
-        icon: '🔧',
         description: 'Our expert plumbers handle everything from minor repairs to complete system installations.',
-        images: ['../assets/images/1-5.jpg', 'plumbing2.jpg', 'plumbing3.jpg'],
+        images: ['../assets/images/plumber1.jpg', '../assets/images/plumber2.jpg', '../assets/images/plumber3.jpg'],
         cost: 199,
         features: [
             'Leak detection and repair',
@@ -17,9 +16,8 @@ const serviceDetails = {
     },
     electrical: {
         title: 'Electrical Services',
-        icon: '⚡',
         description: 'Professional electrical work performed by certified technicians.',
-        images: ['electrical1.jpg', 'electrical2.jpg', 'electrical3.jpg'],
+        images: ['../assets/images/electrical1.jpg', '../assets/images/electrical2.jpg', '../assets/images/electrical3.jpg'],
         cost: 99,
         features: [
             'Outlet and switch installation',
@@ -32,9 +30,8 @@ const serviceDetails = {
     },
     carpentry: {
         title: 'Carpentry Services',
-        icon: '🪛',
         description: 'Expert carpentry for all your woodworking needs.',
-        images: ['carpentry1.jpg', 'carpentry2.jpg', 'carpentry3.jpg'],
+        images: ['../assets/images/Carpenter1.jpg', '../assets/images/Carpenter2.jpg', '../assets/images/Carpenter3.jpg'],
         cost: 299,
         features: [
             'Custom furniture building',
@@ -47,9 +44,8 @@ const serviceDetails = {
     },
     painting: {
         title: 'Painting Services',
-        icon: '🎨',
         description: 'Professional painting services for interior and exterior projects.',
-        images: ['painting1.jpg', 'painting2.jpg', 'painting3.jpg'],
+        images: ['../assets/images/painting1.jpg', '../assets/images/painting2.jpg', '../assets/images/painting3.jpg'],
         cost: 149,
         features: [
             'Interior wall painting',
@@ -62,9 +58,8 @@ const serviceDetails = {
     },
     flooring: {
         title: 'Flooring Services',
-        icon: '🏗️',
         description: 'Quality flooring solutions for any room.',
-        images: ['flooring1.jpg', 'flooring2.jpg', 'flooring3.jpg'],
+        images: ['../assets/images/flooring1.jpg', '../assets/images/flooring2.jpg', '../assets/images/flooring3.jpg'],
         cost: 199,
         features: [
             'Hardwood flooring installation',
@@ -77,9 +72,8 @@ const serviceDetails = {
     },
     renovation: {
         title: 'Home Renovation',
-        icon: '🏠',
         description: 'Complete home renovation services to transform your space.',
-        images: ['renovation1.jpg', 'renovation2.jpg', 'renovation3.jpg'],
+        images: ['../assets/images/renovation1.jpg', '../assets/images/renovation2.jpg', '../assets/images/renovation3.jpg'],
         cost: 299,
         features: [
             'Kitchen remodeling',
@@ -92,9 +86,8 @@ const serviceDetails = {
     },
     salon: {
         title: 'Salon Services',
-        icon: '💇',
         description: 'Professional salon services for all your beauty needs.',
-        images: ['salon1.jpg', 'salon2.jpg', 'salon3.jpg'],
+        images: ['../assets/images/salon1.jpg', '../assets/images/salon2.jpg', '../assets/images/salon3.jpg'],
         cost: 99,
         features: [
             'Haircuts and styling',
@@ -107,9 +100,8 @@ const serviceDetails = {
     },
     moving: {
         title: 'Moving Services',
-        icon: '🚚',
         description: 'Professional moving services to relocate your belongings.',
-        images: ['moving1.jpg', 'moving2.jpg', 'moving3.jpg'],
+        images: ['../assets/images/moving1.jpg', '../assets/images/moving2.jpg', '../assets/images/moving3.jpg'],
         cost: 199,
         features: [
             'Local and long-distance moves',
@@ -122,9 +114,8 @@ const serviceDetails = {
     },
     pest: {
         title: 'Pest Control',
-        icon: '🦟',
         description: 'Effective pest control solutions to keep your home safe.',
-        images: ['pest1.jpg', 'pest2.jpg', 'pest3.jpg'],
+        images: ['../assets/images/pest1.jpg', '../assets/images/pest2.jpg', '../assets/images/pest3.jpg'],
         cost: 99,
         features: [
             'Rodent control',
@@ -137,9 +128,8 @@ const serviceDetails = {
     },
     vehicle: {
         title: 'Vehicle cleaning',
-        icon: '🚗',
         description: 'Professional vehicle cleaning services to keep your car looking its best.',
-        images: ['vehicle1.jpg', 'vehicle2.jpg', 'vehicle3.jpg'],
+        images: ['../assets/images/vehicle1.jpg', '../assets/images/vehicle2.jpg', '../assets/images/vehicle3.jpg'],
         cost: 199,
         features: [
             'Interior and exterior cleaning',
